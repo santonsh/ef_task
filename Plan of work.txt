@@ -1,0 +1,20 @@
+Plan of work
+
+Given:
+    Input:
+    data.json
+    array of items:
+        timestamp
+        assetA
+            bid
+            ask
+        assetB
+            bid
+            ask
+
+Write a trading bot that outputs timestamped orders of sort - [buy A, sell B] 
+
+Trading bot scheme:
+marketInputs -> features -> assetPredictions [t, price, prob] -> portfolioOtimization -> orders
+             -> signals  -> 
+
