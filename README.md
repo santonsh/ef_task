@@ -19,6 +19,16 @@ Write a strategy to generate a trading series. You can use the evaluator to test
 
 On top of the resulting process, add your thoughts of the following points:
 
+* [Anton - answers specific to marketmaking strategy]
+* What are the differences between running such a trading simulation and real world trading?
+    * [Anton] At real worldtrading we dont know the winning bid/ask and we need to "guess it" by putting orders close to the edge of the order book
+    * [Anton] Prediction (and probabaly decision) should happen at t-delta - a bit earlier than an actual timesample arrives
+* How would you improve your strategy given more time/resources?
+    * [Anton] I would detect further falls/rises in market price to cut the risk of market making strategy
+* How would the strategy differ given three assets? Four assets? N assets?
+    * [Anton] Given limited funds I would choose big spread assets and optimize portfolio bases of assets risk/profit predictions
+
+* [Anton - general answers]
 * What are the differences between running such a trading simulation and real world trading?
     * [Anton] Prediction (and probabaly decision) should happen at t-delta - a bit earlier than an actual timesample arrives
     * [Anton] Failsafe wrapper mechanisms should be implemented to protect against high losses due to buggy input and unexpected market behaviour
@@ -43,6 +53,9 @@ On top of the resulting process, add your thoughts of the following points:
 # Solution
 
 ### General plan of work
+    ##################################################
+    ################### V0 ###########################
+    ##################################################
     * The work is perfrmed in a ipynb notebook
     * The first stage is to learn about signals. The next features were unalyzed:
         ** sampling frequency
@@ -52,10 +65,17 @@ On top of the resulting process, add your thoughts of the following points:
     * implement basic reference strategy for bot using "idealPredictor" as a signal predictor. idealPredictor just takes real data from the future so it is not a valid solution for a task strategy but can be used as a gloden standard for future predictors and strategies - [ONLY THIS STRATEGY IS IMPLEMENTED IN V0]
     * implement unfair overfitted NN predictor trained on the whole day data. Again it is not a valid strtegy but can be used for a debug and development purpoces and as a silver standard for next strategies - [NOT IMPLEMENTED IN V0]
     * implement fair NN predictor trained on the part of the day data and used to evaluate the rest of the day. This should implement a valid task solution - [NOT IMPLEMENTED IN V0]
-    * implement dynamic NN predictor trained on the part of the day data and retrained constantly to imporove performance. A bonus strategy so to say. [NOT IMPLEMENTED IN V0]    
+    * implement dynamic NN predictor trained on the part of the day data and retrained constantly to imporove performance. A bonus strategy so to say. [NOT IMPLEMENTED IN V0]  
+    
+    ##################################################
+    ################### V1 ###########################
+    ##################################################
+    * implement simple market maker strategy (what actually was required). [IMPLEMENTED IN V1] - [mm_strategy.ipynb]  
+    
 
 ### Discaimer
-1. A lot of effort was put into creating a bot instead of a strategy thus task target is still missed in v0
+0. Instead of reading about market making strategies "free wondering mind" approach was used and simple traditional bot was implemented in the version 0 (facepalm). After first version was submitted I've added a simple market making strategy as well. It is implementd in mm_strategy.ipynb  
+1. A lot of effort was put into creating a bot instead of a strategy thus task target is still missed in v0 [but completed in v1]
 2. Bot was implemented to trade in an "allA/allB/allFiat" manner orders instead of "orders of size 1" only
 
 ### Signals Study Conclutions
@@ -119,7 +139,7 @@ On top of the resulting process, add your thoughts of the following points:
 
 
 
-### Signal predictors and relatig strategies
+### Signal predictors and relating market taker strategies
     1. idealPredictor strategy. 
     Implemented and working. Output file is output.json
 
@@ -132,3 +152,9 @@ On top of the resulting process, add your thoughts of the following points:
     4. dymanic NN predictor strategy
     To be implemented in future versions of the bot
 
+### Simple market maker strategy
+    * implemented in mm_strategy.ipynb
+    * does not use market sharp fall/rise predictions
+    * if market is relatively stable and there is a spread trades by realizing sells close to market ask and buys close to market bid
+    * is not analyzed well
+    
