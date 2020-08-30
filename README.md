@@ -21,10 +21,12 @@ On top of the resulting process, add your thoughts of the following points:
 
 * [Anton - answers specific to marketmaking strategy]
 * What are the differences between running such a trading simulation and real world trading?
-    * [Anton] At real worldtrading we dont know the winning bid/ask and we need to "guess it" by putting orders close to the edge of the order book
+    * [Anton] At real world trading we dont know the winning bid/ask and we need to "guess it" by putting orders close to the edge of the order book
+    * [Anton] In the real world trading fees are non zero thus not for every spread the trading is profitable
     * [Anton] Prediction (and probabaly decision) should happen at t-delta - a bit earlier than an actual timesample arrives
 * How would you improve your strategy given more time/resources?
     * [Anton] I would detect further falls/rises in market price to cut the risk of market making strategy
+    * [Anton] Turn the algorithms from tick based to time based to account for tick non-uniformity
 * How would the strategy differ given three assets? Four assets? N assets?
     * [Anton] Given limited funds I would choose big spread assets and optimize portfolio bases of assets risk/profit predictions
 
@@ -66,7 +68,7 @@ On top of the resulting process, add your thoughts of the following points:
     * implement unfair overfitted NN predictor trained on the whole day data. Again it is not a valid strtegy but can be used for a debug and development purpoces and as a silver standard for next strategies - [NOT IMPLEMENTED IN V0]
     * implement fair NN predictor trained on the part of the day data and used to evaluate the rest of the day. This should implement a valid task solution - [NOT IMPLEMENTED IN V0]
     * implement dynamic NN predictor trained on the part of the day data and retrained constantly to imporove performance. A bonus strategy so to say. [NOT IMPLEMENTED IN V0]  
-    
+
     ##################################################
     ################### V1 ###########################
     ##################################################
